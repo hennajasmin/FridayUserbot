@@ -12,15 +12,15 @@ blacklist = db_x["BLACKLIST"]
 
 
 async def add_to_blacklist(trigger, chat_id):
-    blacklist.insert_one({"trigger": trigger, "chat_id": chat_id})
+    await blacklist.insert_one({"trigger": trigger, "chat_id": chat_id})
 
 
 async def del_blacklist(trigger, chat_id):
-    blacklist.delete_one({"trigger": trigger, "chat_id": chat_id})
+    await blacklist.delete_one({"trigger": trigger, "chat_id": chat_id})
 
 
 async def get_chat_blacklist(chat_id):
-    r = list(blacklist.find({"chat_id": chat_id}))
+    r = [u async for u in blacklist.find({"chat_id": chat_id})]
     if r:
         return r
     else:
@@ -28,7 +28,7 @@ async def get_chat_blacklist(chat_id):
 
 
 async def num_blacklist():
-    lol = list(blacklist.find({}))
+    lol = [l async for l in blacklist.find({})]
     if lol:
         return len(lol)
     else:
@@ -36,7 +36,7 @@ async def num_blacklist():
 
 
 async def num_blacklist_triggers_chat(chat_id):
-    r = list(blacklist.find({"chat_id": chat_id}))
+    r = [m async for m in blacklist.find({"chat_id": chat_id})]
     if r:
         return len(r)
     else:
@@ -44,7 +44,7 @@ async def num_blacklist_triggers_chat(chat_id):
 
 
 async def is_blacklist_in_db(chat_id, trigger):
-    m = blacklist.find_one({"chat_id": chat_id, "trigger": trigger})
+    m = await blacklist.find_one({"chat_id": chat_id, "trigger": trigger})
     if m:
         return True
     else:
@@ -52,4 +52,4 @@ async def is_blacklist_in_db(chat_id, trigger):
 
 
 async def blacklists_del(chat_id):
-    blacklist.delete_many({"chat_id": chat_id})
+    await blacklist.delete_many({"chat_id": chat_id})
