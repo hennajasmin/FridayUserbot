@@ -92,7 +92,7 @@ async def autoposterz(client, message):
     chat_id = str(message.chat.id).replace("-100", "")
     if not await get_autopost(int(chat_id)):
         message.continue_propagation()
-    channels_set = get_autopost(int(chat_id))
+    channels_set = await get_autopost(int(chat_id))
     if not channels_set:
         message.continue_propagation()
     for chat in channels_set:
