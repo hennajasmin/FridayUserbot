@@ -204,12 +204,12 @@ async def delete_user_msgs(client, message):
     if not message.from_user:
         message.continue_propagation()
     user = message.from_user.id
-    if await await is_gmuted(user):
+    if await is_gmuted(user):
         try:
             await message.delete()
         except:
             message.continue_propagation()
-    if await await gban_info(user):
+    if await gban_info(user):
         me_ = await message.chat.get_member(int(client.me.id))
         if not me_.can_restrict_members:
             message.continue_propagation()
