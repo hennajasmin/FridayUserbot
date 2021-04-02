@@ -11,7 +11,7 @@ from database import db_x
 filter = db_x["FILTER"]
 
 
-def add_filters(keyword, chat_id, message_id) -> None:
+async def add_filters(keyword, chat_id, message_id) -> None:
     stark = filter.find_one({"keyword": keyword})
     if stark:
         filter.update_one(
@@ -24,11 +24,11 @@ def add_filters(keyword, chat_id, message_id) -> None:
         )
 
 
-def del_filters(keyword, chat_id):
+async def del_filters(keyword, chat_id):
     filter.delete_one({"keyword": keyword, "chat_id": chat_id})
 
 
-def filters_info(keyword, chat_id):
+async def filters_info(keyword, chat_id):
     r = filter.find_one({"keyword": keyword, "chat_id": chat_id})
     if r:
         return r
@@ -36,11 +36,11 @@ def filters_info(keyword, chat_id):
         return False
 
 
-def filters_del(chat_id):
+async def filters_del(chat_id):
     filter.delete_many({"chat_id": chat_id})
 
 
-def all_filters(chat_id):
+async def all_filters(chat_id):
     r = list(filter.find({"chat_id": chat_id}))
     if r:
         return r

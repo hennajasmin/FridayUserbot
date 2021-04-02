@@ -12,20 +12,20 @@ chatbot_user_db = db_x["chatbotuserdb"]
 cbb = db_x["blacklisted_users"]
 
 
-def add_chatbotuser(user_id):
+async def add_chatbotuser(user_id):
     chatbot_user_db.insert_one({"user_id": user_id})
 
 
-def rmchatbotuser(user_id):
+async def rmchatbotuser(user_id):
     chatbot_user_db.delete_one({"user_id": user_id})
 
 
-def get_all_chatbotusers():
+async def get_all_chatbotusers():
     lol = list(chatbot_user_db.find())
     return lol
 
 
-def is_chatbotuser_in_db(user_id):
+async def is_chatbotuser_in_db(user_id):
     k = chatbot_user_db.find_one({"user_id": user_id})
     if k:
         return True
@@ -33,15 +33,15 @@ def is_chatbotuser_in_db(user_id):
         return False
 
 
-def add_blacklisted_user(user_id):
+async def add_blacklisted_user(user_id):
     cbb.insert_one({"user_id": user_id})
 
 
-def rm_blacklisted_user(user_id):
+async def rm_blacklisted_user(user_id):
     cbb.delete_one({"user_id": user_id})
 
 
-def is_user_blacklisted(user_id):
+async def is_user_blacklisted(user_id):
     b = cbb.find_one({"user_id": user_id})
     if b:
         return True

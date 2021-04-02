@@ -11,19 +11,19 @@ from database import db_x
 gbun = db_x["GBAN"]
 
 
-def gban_user(user, reason="#GBanned"):
+async def gban_user(user, reason="#GBanned"):
     gbun.insert_one({"user": user, "reason": reason})
 
 
-def ungban_user(user):
+async def ungban_user(user):
     gbun.delete_one({"user": user})
 
 
-def gban_list():
+async def gban_list():
     return list(gbun.find({}))
 
 
-def gban_info(user):
+async def gban_info(user):
     kk = gbun.find_one({"user": user})
     if not kk:
         return False

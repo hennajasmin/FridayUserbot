@@ -11,7 +11,7 @@ from database import db_x
 notes = db_x["NOTES"]
 
 
-def add_note(keyword, chat_id, message_id):
+async def add_note(keyword, chat_id, message_id):
     stark = notes.find_one({"keyword": keyword})
     if stark:
         notes.update_one(
@@ -22,15 +22,15 @@ def add_note(keyword, chat_id, message_id):
         notes.insert_one({"keyword": keyword, "chat_id": chat_id, "msg_id": message_id})
 
 
-def del_note(keyword, chat_id):
+async def del_note(keyword, chat_id):
     notes.delete_one({"keyword": keyword, "chat_id": chat_id})
 
 
-def del_notes(chat_id):
+async def del_notes(chat_id):
     notes.delete_many({"chat_id": chat_id})
 
 
-def note_info(keyword, chat_id):
+async def note_info(keyword, chat_id):
     r = notes.find_one({"keyword": keyword, "chat_id": chat_id})
     if r:
         return r
@@ -38,7 +38,7 @@ def note_info(keyword, chat_id):
         return False
 
 
-def all_note(chat_id):
+async def all_note(chat_id):
     r = list(notes.find({"chat_id": chat_id}))
     if r:
         return r

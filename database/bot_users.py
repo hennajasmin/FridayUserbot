@@ -10,17 +10,17 @@ from database import db_x
 
 bot = db_x["BOT_USERS"]
 
-def add_user(user_id):
+async def add_user(user_id):
     bot.insert_one({"user_id": user_id})
 
-def check_user(user_id):
+async def check_user(user_id):
     Lol = bot.find_one({"user_id": user_id})
     if Lol:
         return True
     else:
         return False
 
-def get_all_users():
+async def get_all_users():
     Lol = bot.find()
     return Lol
 

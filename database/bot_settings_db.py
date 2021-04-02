@@ -21,7 +21,7 @@ If He Needs To Talk To You, He Will Approve You!</i>
 default_thumb = "https://icon-icons.com/downloadimage.php?id=106660&root=1527/PNG/512/&file=shield_106660.png"
 
 
-def add_pm_text(text=default_text):
+async def add_pm_text(text=default_text):
     ujwal = bsdb.find_one({"_id": "PM_START_MSG"})
     if ujwal:
         bsdb.update_one({"_id": "PM_START_MSG"}, {"$set": {"pm_msg": text}})
@@ -29,7 +29,7 @@ def add_pm_text(text=default_text):
         bsdb.insert_one({"_id": "PM_START_MSG", "pm_msg": text})
 
 
-def add_pm_thumb(thumb=default_thumb):
+async def add_pm_thumb(thumb=default_thumb):
     ujwal = bsdb.find_one({"_id": "PM_START_THUMB"})
     if ujwal:
         bsdb.update_one({"_id": "PM_START_THUMB"}, {"$set": {"pm_img": text}})
@@ -37,7 +37,7 @@ def add_pm_thumb(thumb=default_thumb):
         bsdb.insert_one({"_id": "PM_START_THUMB", "pm_img": text})
 
 
-def get_thumb():
+async def get_thumb():
     ujwal = bsdb.find_one({"_id": "PM_START_THUMB"})
     if ujwal:
         return ujwal["pm_img"]
@@ -45,7 +45,7 @@ def get_thumb():
         return default_thumb
 
 
-def get_pm_text():
+async def get_pm_text():
     ujwal = bsdb.find_one({"_id": "PM_START_MSG"})
     if ujwal:
         return ujwal["pm_msg"]
@@ -53,7 +53,7 @@ def get_pm_text():
         return default_text
 
 
-def set_chat_bot_setting(settin=False):
+async def set_chat_bot_setting(settin=False):
     meisnub = bsdb.find_one({"_id": "CHAT_BOT_S"})
     if meisnub:
         bsdb.update_one({"_id": "CHAT_BOT_S"}, {"$set": {"chat_bot": settin}})
@@ -61,7 +61,7 @@ def set_chat_bot_setting(settin=False):
         bsdb.insert_one({"_id": "CHAT_BOT_S", "chat_bot": settin})
 
 
-def get_chatbot_setting():
+async def get_chatbot_setting():
     ujwal = bsdb.find_one({"_id": "CHAT_BOT_S"})
     if ujwal:
         return ujwal["chat_bot"]
@@ -69,7 +69,7 @@ def get_chatbot_setting():
         return True
 
 
-def set_pm_spam_limit(psl=3):
+async def set_pm_spam_limit(psl=3):
     stark = bsdb.find_one({"_id": "LIMIT_PM"})
     if stark:
         bsdb.update_one({"_id": "LIMIT_PM"}, {"$set": {"psl": psl}})
@@ -77,7 +77,7 @@ def set_pm_spam_limit(psl=3):
         bsdb.insert_one({"_id": "LIMIT_PM", "psl": psl})
 
 
-def get_pm_spam_limit():
+async def get_pm_spam_limit():
     meisnub = bsdb.find_one({"_id": "LIMIT_PM"})
     if meisnub:
         return meisnub["psl"]
@@ -85,7 +85,7 @@ def get_pm_spam_limit():
         return 3
 
 
-def pm_permit_should_work(sw=True):
+async def pm_permit_should_work(sw=True):
     die = bsdb.find_one({"_id": "PM"})
     if die:
         bsdb.update_one({"_id": "PM"}, {"$set": {"pm_s": sw}})
@@ -93,7 +93,7 @@ def pm_permit_should_work(sw=True):
         bsdb.insert_one({"_id": "PM", "pm_s": sw})
 
 
-def get_pm_setting_s():
+async def get_pm_setting_s():
     stark = bsdb.find_one({"_id": "PM"})
     if stark:
         return stark["pm_s"]
@@ -101,5 +101,5 @@ def get_pm_setting_s():
         return True
 
 
-# def add_black_list_chat(chat_id):
+# async def add_black_list_chat(chat_id):
 #   black_list_find = bsdb.find_one({"_id": "BLC"})
