@@ -28,14 +28,6 @@ logging.getLogger("apscheduler").setLevel(logging.ERROR)
 
 mongo_client = motor.motor_asyncio.AsyncIOMotorClient(Config.MONGO_DB)
 
-try:
-    await mongo_client.server_info()
-except BaseException as e:
-    logging.error("Invalid Mongo DB URL. Please Check Your Credentials! Friday is Exiting...")
-    logging.error(str(e))
-    quit(1)
-
-
 CMD_LIST = {}
 XTRA_CMD_LIST = {}
 sudo_id = Config.AFS
