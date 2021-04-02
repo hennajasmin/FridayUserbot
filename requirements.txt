@@ -44,3 +44,4 @@ Pillow
 pyshorteners>=1.0.1
 telegraph>=1.4.1
 heroku3>=4.2.3
+motor
