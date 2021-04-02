@@ -109,7 +109,7 @@ async def gmute_him(client, message):
 async def gbun_him(client, message):
     gbun = await edit_or_reply(message, "`Processing..`")
     text_ = get_text(message)
-    user, reason = get_user(message, text_)
+    user, reason = await get_user(message, text_)
     failed = 0
     if not user:
         await gbun.edit("`Reply To User Or Mention To GBan Him`")
