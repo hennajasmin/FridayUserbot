@@ -38,7 +38,7 @@ async def welcomenibba(client, message):
         message.continue_propagation()
     if not message.chat:
         message.continue_propagation()
-    if not welcome_info(message.chat.id):
+    if not await welcome_info(message.chat.id):
         message.continue_propagation()
     sed = await welcome_info(message.chat.id)
     await client.copy_message(
