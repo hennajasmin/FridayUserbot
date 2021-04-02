@@ -54,7 +54,7 @@ async def gmute_him(client, message):
     if userz.id in Config.AFS:
         await g.edit("`Sudo Users Can't Be Gmutted! Remove Him And Try Again!`")
         return
-    if is_gmuted(userz.id):
+    if await is_gmuted(userz.id):
         await g.edit("`Re-Gmute? Seriously? :/`")
         return
     await gmute(userz.id, reason)
@@ -89,7 +89,7 @@ async def gmute_him(client, message):
     if userz.id in Config.AFS:
         await ug.edit("`Sudo Users Can't Be Un-Gmutted! Remove Him And Try Again!`")
         return
-    if not is_gmuted(userz.id):
+    if not await is_gmuted(userz.id):
         await ug.edit("`Un-Gmute A Non Gmutted User? Seriously? :/`")
         return
     await ungmute(userz.id)
@@ -130,7 +130,7 @@ async def gbun_him(client, message):
     if userz.id in Config.AFS:
         await gbun.edit("`Sudo Users Can't Be Gbanned! Remove Him And Try Again!`")
         return
-    if gban_info(userz.id):
+    if await gban_info(userz.id):
         await gbun.edit("`Re-Gban? Seriously? :/`")
         return
     await gbun.edit("`Please, Wait Fectching Your Chats!`")
@@ -175,7 +175,7 @@ async def ungbun_him(client, message):
     if userz.id == (await client.get_me()).id:
         await ungbun.edit("`Oh, This is So Funny Btw :/`")
         return
-    if not gban_info(userz.id):
+    if not await gban_info(userz.id):
         await ungbun.edit("`Un-Gban A Ungbanned User? Seriously? :/`")
         return
     await ungbun.edit("`Please, Wait Fectching Your Chats!`")
@@ -234,7 +234,7 @@ async def delete_user_msgs(client, message):
 async def give_glist(client, message):
     oof = "**#GBanList** \n\n"
     glist = await edit_or_reply(message, "`Processing..`")
-    list_ =await gban_list()
+    list_ = await gban_list()
     if len(list_) == 0:
         await glist.edit("`No User is Gbanned Till Now!`")
         return
