@@ -34,5 +34,5 @@ async def del_autopost(to_channel, target_channel):
 
 
 async def get_autopost(target_channel):
-    sed = [s async for s in autoposter.find({"target_channel": int(target_channel)})
+    sed = [s async for s in autoposter.find({"target_channel": int(target_channel)})]
     return sed
