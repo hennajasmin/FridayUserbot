@@ -11,20 +11,19 @@ from database import db_x
 afk = db_x["AFK"]
 
 async def go_afk(time, reason=""):
-    
-    midhun = afk.find_one({"_id": "AFK"})
+    midhun = await afk.find_one({"_id": "AFK"})
     if midhun:
-        afk.update_one({"_id": "AFK"}, {"$set": {"time": time, "reason": reason}})
+        await afk.update_one({"_id": "AFK"}, {"$set": {"time": time, "reason": reason}})
     else:
-        afk.insert_one({"_id": "AFK", "time": time, "reason": reason})
+        await afk.insert_one({"_id": "AFK", "time": time, "reason": reason})
 
 async def no_afk():
-    midhun = afk.find_one({"_id": "AFK"})
+    midhun = await afk.find_one({"_id": "AFK"})
     if midhun:
-        afk.delete_one({"_id": "AFK"})
+       await afk.delete_one({"_id": "AFK"})
     
 async def check_afk():
-    midhun = afk.find_one({"_id": "AFK"})
+    midhun = await afk.find_one({"_id": "AFK"})
     if midhun:
         return midhun
     else:
