@@ -12,19 +12,19 @@ gbun = db_x["GBAN"]
 
 
 async def gban_user(user, reason="#GBanned"):
-    gbun.insert_one({"user": user, "reason": reason})
+    await gbun.insert_one({"user": user, "reason": reason})
 
 
 async def ungban_user(user):
-    gbun.delete_one({"user": user})
+    await gbun.delete_one({"user": user})
 
 
 async def gban_list():
-    return list(gbun.find({}))
+    return [lo async for lo in gbun.find({})]
 
 
 async def gban_info(user):
-    kk = gbun.find_one({"user": user})
+    kk = await gbun.find_one({"user": user})
     if not kk:
         return False
     else:
